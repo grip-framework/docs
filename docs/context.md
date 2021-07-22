@@ -10,6 +10,7 @@ Context is a class which contains the Request, Response structures of an HTTP se
 [`merge_resp_headers/1`](#merge_resp_headers)
 [`put_req_header/2`](#put_req_header)
 [`put_resp_header/2`](#put_resp_header)
+[`put_resp_cookie/2`](#put_resp_cookie)
 [`put_status/1`](#put_status)
 [`send_resp`/1](#send_resp)
 [`json/2`](#json)
@@ -128,6 +129,18 @@ Adds a new response header `(key)` if not present, otherwise replaces the previo
 def get(context : Context) : Context
   context
     .put_resp_header("Content-Type", "application/json")
+    .send_resp("Hello, World!")
+end
+```
+
+### put_resp_cookie
+
+Adds a new cookie to the response. If the cookie already exists it will be overwritten.
+
+```ruby
+def get(context : Context) : Context
+  context
+    .put_resp_cookie("MyCookie", "Cookie Value") # Or .put_resp_cookie(HTTP::Cookie.new("MyCookie", "Cookie Value"))
     .send_resp("Hello, World!")
 end
 ```
