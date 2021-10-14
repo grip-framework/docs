@@ -34,7 +34,7 @@ class Application < Grip::Application
 
     scope "/api" do
       forward "/swagger/*",
-        Grip::ThirdParty::Swagger::Interface,
+        Grip::Controllers::Swagger,
         document: document(),
         base_path: "/api/swagger"
 
