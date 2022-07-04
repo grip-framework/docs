@@ -2,6 +2,7 @@ Context is a class which contains the Request, Response structures of an HTTP se
 
 ## Available methods
 
+[`exec/0`](#exec)
 [`delete_req_header/1`](#delete_req_header)
 [`delete_resp_header/1`](#delete_resp_header)
 [`get_req_header/1`](#get_req_header)
@@ -12,7 +13,8 @@ Context is a class which contains the Request, Response structures of an HTTP se
 [`put_resp_header/2`](#put_resp_header)
 [`put_resp_cookie/2`](#put_resp_cookie)
 [`put_status/1`](#put_status)
-[`send_resp`/1](#send_resp)
+[`send_file/1`](#send_file)
+[`send_resp/1`](#send_resp)
 [`json/2`](#json)
 [`html/2`](#html)
 [`text/2`](#text)
@@ -22,6 +24,24 @@ Context is a class which contains the Request, Response structures of an HTTP se
 [`fetch_body_params/0`](#fetch_body_params)
 [`fetch_file_params/0`](#fetch_file_params)
 [`fetch_path_params/0`](#fetch_path_params)
+
+### exec
+
+Run a block in the context scope.
+
+```ruby
+def get(context : Context)
+  context.exec do
+    put_status(201) # Put a response status code.
+    put_resp_header("Server", "TornadoServer/6.0.4") # Put a response header.
+    json( # Respond with JSON encoded data.
+      {
+        "id" => 1
+      }
+    )
+  end
+end
+```
 
 ### delete_req_header
 
@@ -154,6 +174,17 @@ def get(context : Context) : Context
   context
     .put_status(400)
     .json("Bad request")
+end
+```
+
+### send_file
+
+Sends a file to the client.
+
+```ruby
+def get(context : Context) : Context
+  context
+    .send_file("./example.txt")
 end
 ```
 
