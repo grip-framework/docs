@@ -1,12 +1,12 @@
-1.Add spec-grip to your shard.yml file as a dependencie.
+1.Add spectator to your shard.yml file as a dependencie.
 
 ```yaml
 dependencies:
   grip:
     github: grip-framework/grip
 
-  spec-grip:
-    github: grip-framework/spec-grip
+  spectator:
+    github: grip-framework/spectator
 ```
 
 2.Then run shards to get the dependencies:
@@ -18,13 +18,13 @@ $ shards install
 3.Now you should require it before your files in your spec/spec_helper.cr
 
 ```
-require "spec-grip"
 require "../src/your-grip-app"
+require "spectator"
 ```
 
 For example, your Grip application:
 
-```ruby
+```crystal
 # src/your-grip-app.cr
 
 require "grip"
@@ -41,9 +41,6 @@ class Application < Grip::Application
     get "/", Index
   end
 end
-
-app = Application.new
-app.run
 ```
 
 4.Now you can easily test your Grip application in your specs.
@@ -52,15 +49,14 @@ app.run
 crystal spec -Dtest
 ```
 
-```ruby
+```crystal
 # spec/your-grip-app-spec.cr
 
-describe "Your::Grip::App" do
-  # You can use get,post,put,patch,delete to call the corresponding route.
+describe Index do
+  # You can use GET, POST, PUT, PATCH, DELETE to call the corresponding route.
   it "renders /" do
-    get "/" do |response|
-      response.body.should eq "Hello, World!"
-    end
+    response = get Application.new, "/"
+    response.status_code.should eq 200
   end
 end
 ```
