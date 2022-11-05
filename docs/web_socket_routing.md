@@ -22,7 +22,7 @@ class DemoController < Grip::Controllers::WebSocket
     # Executed when a client sends a binary message.
   end
 
-  def on_close(context : Context, socket : Socket, error_code : HTTP::WebSocket::CloseCode | Int?, message : String) : Void
+  def on_close(context : Context, socket : Socket, close_code : HTTP::WebSocket::CloseCode | Int?, message : String) : Void
     # Executed when a client closes the connection to the server.
   end
 end
@@ -46,9 +46,9 @@ class SecureHeaders
 end
 
 class Application < Grip::Application
+  def initialize
+    super(environment: "development", serve_static: false)
 
-
-  def routes
     pipeline :api, [
       PoweredByHeader.new
     ]

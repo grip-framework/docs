@@ -10,18 +10,20 @@ class DemoHandler
 end
 
 class Application < Grip::Application
-  # These are inserted after the exception handler
-  def custom : Array(HTTP::Handler)
-    [
-      DemoHandler.new
-    ] of HTTP::Handler
-  end
+  def initialize
+    super(environment: "development", serve_static: false)
 
-  # These are inserted before the exception handler
-  def root : Array(HTTP::Handler)
-    [
-      DemoHandler.new
-    ] of HTTP::Handler
+    # By default the router has 4 entries, if you insert a handler
+    # before the exception handler any exception that might occur in
+    # your newly inserted handler will not be handled and might crash the application.
+    #
+    # [
+    #   exception_handler,
+    #   pipeline_handler,
+    #   websocket_handler,
+    #   http_handler,
+    # ]
+    router.insert(1, DemoHandler.new)
   end
 end
 ```

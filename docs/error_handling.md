@@ -34,9 +34,11 @@ class ForbiddenController < Grip::Controllers::Exception
 end
 
 class Application < Grip::Application
-  def routes
-    error 403, ForbiddenController
-    error 404, NotFoundController
+  def initialize
+    super(environment: "development", serve_static: false)
+
+    exception Grip::Exceptions::Forbidden, ForbiddenController
+    exception Grip::Exceptions::NotFound, NotFoundController
 
     get "/", IndexController
   end
@@ -66,13 +68,13 @@ class IndexController < Grip::Controllers::Http
 end
 ```
 
-you can also raise any exception you want and handle it in the error handler like this:
+You can also raise any exception you want and handle it in the error handler like this:
 
 ```ruby
 class ArgumentException < Grip::Exceptions::Base
-  @status = HTTP::Status::BAD_REQUEST
-
-  def initialize(@message : String = "Argument error")
+  def initialize(message : String)
+    @status_code = HTTP::Status::INTERNAL_SERVER_ERROR
+    super message
   end
 end
 

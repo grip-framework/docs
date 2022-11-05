@@ -31,7 +31,9 @@ class DemoController < Grip::Controllers::Http
 end
 
 class Application < Grip::Application
-  def routes
+  def initialize
+    super(environment: "development", serve_static: false)
+
     get "/", DemoController
   end
 end

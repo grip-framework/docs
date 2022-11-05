@@ -9,7 +9,9 @@ class DemoController < Grip::Controllers::Http
 end
 
 class Application < Grip::Application
-  def routes
+  def initialize
+    super(environment: "development", serve_static: false)
+
     # The routing occurs via the `get` macro which instantiates the controller class and assigns a route
     # to the routing mechanism.
     get "/", DemoController
