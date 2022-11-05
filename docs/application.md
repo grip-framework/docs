@@ -7,6 +7,9 @@ Application class is a building class which initializes the crucial parts of the
 [`custom/0`](#custom)
 [`port/0`](#port)
 [`reuse_port/0`](#reuse_port)
+[`public_dir/0`](#public_dir)
+[`fallthrough/0`](#fallthrough)
+[`directory_listing/0`](#directory_listing)
 [`router/0`](#router)
 [`server/0`](#server)
 [`key_file/0`](#key_file)
@@ -22,30 +25,6 @@ The host of the server.
 class Application < Grip::Application
   def host : String
     "127.0.0.1"
-  end
-end
-```
-
-### root
-
-The root handlers inserted before the Exception handler.
-
-```ruby
-class Application < Grip::Application
-  def root : Array(HTTP::Handler)
-    [] of HTTP::Handler
-  end
-end
-```
-
-### custom
-
-The custom handlers inserted after the Exception handler.
-
-```ruby
-class Application < Grip::Application
-  def custom : Array(HTTP::Handler)
-    [] of HTTP::Handler
   end
 end
 ```
@@ -70,6 +49,42 @@ The reuse_port boolean of the server.
 class Application < Grip::Application
   def reuse_port : Bool
     true
+  end
+end
+```
+
+### public_dir
+
+The public_dir for the static file handler.
+
+```ruby
+class Application < Grip::Application
+  def pubilc_dir : String
+    "./public"
+  end
+end
+```
+
+### fallthrough
+
+The fallthrough boolean for the static file handler.
+
+```ruby
+class Application < Grip::Application
+  def fallthrough : Bool
+    false
+  end
+end
+```
+
+### directory_listing
+
+The directory_listing boolean for the static file handler.
+
+```ruby
+class Application < Grip::Application
+  def directory_listing : Bool
+    false
   end
 end
 ```
