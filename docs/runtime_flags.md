@@ -1,6 +1,6 @@
 # Configuration flags
-1.Flag which enables OpenSSL:
+1. Flag which enables HTTPS:
 
 ```bash
-crystal run ./src/appliaction.cr -Dwith_openssl
+crystal run ./src/appliaction.cr -Dssl
 ```
