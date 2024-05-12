@@ -47,7 +47,7 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development", serve_static: false)
+    super(environment: "development")
 
     pipeline :api, [
       PoweredByHeader.new

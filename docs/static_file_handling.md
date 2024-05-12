@@ -1,28 +1,16 @@
 This handler lets you serve static files using Grip
 
-It has several arguments.
-- `public_dir`: Directory that should be served
-- `fallthrough`: Forwards the execution to the `call_next()` function of the HTTP::Handler
-- `directory_listing`: Lists contents of the static directory
 ```ruby
 class Application < Grip::Application
   def initialize
-    super(environment: "development", serve_static: true)
+    super(environment: "development")
 
-    # Static file directory.
-    def pubilc_dir : String
-      "./public"
-    end
+    # This DSL macro will add a static route on / to a "public" directory,
+    # it will allow it to fall through to other handlers and it disables the directory listing.
+    static "/", "./public", fallthrough: true, directory_listing: false
 
-    # Ignore non-existing files and move to the next handler.
-    def fallthrough : Bool
-      false
-    end
-
-    # Enable/Disable directory listing.
-    def directory_listing : Bool
-      false
-    end
+    # By default fallthrough and directory_listing are false.
+    static "/content", "./content"
   end
 end
 ```

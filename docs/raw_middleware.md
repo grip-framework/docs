@@ -11,7 +11,7 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development", serve_static: false)
+    super(environment: "development")
 
     # By default the router has 4 entries, if you insert a handler
     # before the exception handler any exception that might occur in

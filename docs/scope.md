@@ -10,7 +10,7 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development", serve_static: false)
+    super(environment: "development")
 
     # The route gets built from the ground starting from the lowest GET /, to the top /api/v1.
     scope "/api/v1" do

@@ -10,7 +10,7 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development", serve_static: false)
+    super(environment: "development")
 
     # The routing occurs via the `get` macro which instantiates the controller class and assigns a route
     # to the routing mechanism.

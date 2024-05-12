@@ -13,7 +13,7 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development", serve_static: false)
+    super(environment: "development")
 
     # Forward macro simply routes the matched requests to a certain Base controller
     # which contains a single call/1 function.

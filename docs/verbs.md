@@ -3,7 +3,7 @@ There are several HTTP verbs supported by the router:
 ```ruby
 class Application < Grip::Application
   def initialize
-    super(environment: "development", serve_static: false)
+    super(environment: "development")
 
     get "/", DemoController # Routes all the `GET /` requests to DemoController.get/1
     post "/", DemoController # Routes all the `POST /` requests to DemoController.post/1
