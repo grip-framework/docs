@@ -3,28 +3,14 @@ Grip comes with a pre-defined error handlers for the JSON response type. You can
 ```ruby
 class IndexController < Grip::Controllers::Http
   def get(context : Context) : Context
-    raise Grip::Exceptions::NotFound.new
-  end
-end
-
-class NotFoundController < Grip::Controllers::Exception
-  # To keep the structure of the project
-  # we still inherit from the Base class which forces us
-  # to define the default `call` function.
-  def call(context : Context) : Context
-    context
-      .json(
-        {
-          "errors" => [context.exception.not_nil!.to_s]
-        }
-      )
+    raise Grip::Exceptions::Forbidden.new
   end
 end
 
 class ForbiddenController < Grip::Controllers::Exception
   def call(context : Context) : Context
     context
-      .put_status(403) # Raised error automatically carries over the status code of the exception.
+      .put_status(403) # Raised exception automatically carries over the status code if inherited from the base class.
       .json(
         {
           "error" => ["You lack privileges to access the current resource!"]
@@ -38,14 +24,13 @@ class Application < Grip::Application
     super(environment: "development")
 
     exception Grip::Exceptions::Forbidden, ForbiddenController
-    exception Grip::Exceptions::NotFound, NotFoundController
-
-    get "/", IndexController
   end
 end
 ```
 
-Keep in mind that if you won't use the `Exceptions` class this will just return as a normal response:
+### Difference between native and inherited exceptions
+
+Keep in mind that if you won't use one of the classes from the `Exceptions` module this will just return as a normal response:
 
 ```ruby
 class IndexController < Grip::Controllers::Http
@@ -71,42 +56,17 @@ end
 You can also raise any exception you want and handle it in the error handler like this:
 
 ```ruby
-class ArgumentException < Grip::Exceptions::Base
-  def initialize(message : String)
-    @status_code = HTTP::Status::INTERNAL_SERVER_ERROR
-    super message
-  end
-end
-
-class IndexController < Grip::Controllers::Http
-  def get(context : Context) : Context
-    raise ArgumentException.new("Something went wrong")
-  end
-end
-
-class BadRequestController < Grip::Controllers::Exception
+class FallbackController < Grip::Controllers::Exception
   def call(context : Context) : Context
-    case context.exception.not_nil!
-    when Grip::Exceptions::BadRequest
-      context
-        .json(
-          {
-            id:      UUID.random.to_s,
-            message: "400 Bad request",
-          }
-        )
-    when ArgumentException
-      context
-        .json(
-          {
-            id:      UUID.random.to_s,
-            message: "An argument error has occured, #{context.exception.not_nil!}",
-          }
-        )
-    else
-      context
-        .halt
-    end
+    context.json({"error" => "An error occured, please try again later."})
+  end
+end
+
+class Application < Grip::Application
+  def initialize
+    super(environment: "development")
+
+    exception NotImplementedError, FallbackController
   end
 end
 ```
