@@ -19,8 +19,17 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development")
+    super(
+      environment: ENV["ENVIRONMENT"]? || "production"
+      handlers: [
+        Grip::Handlers::HTTP.new,
+      ] of HTTP::Handler
+    )
 
+    routes()
+  end
+
+  def routes()
     # The routing occurs via the `get` macro which instantiates the controller class and assigns a route
     # to the routing mechanism, the `as` keyword creates a Proc(Context, Context) and wraps it around
     # the index/1 function of the DemoController.

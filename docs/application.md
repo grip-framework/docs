@@ -50,18 +50,6 @@ class Application < Grip::Application
 end
 ```
 
-### router
-
-The router of the application.
-
-```ruby
-class Application < Grip::Application
-  def router : Array(HTTP::Handler)
-    [] of HTTP::Handler
-  end
-end
-```
-
 ### server
 
 The server of the application.
@@ -76,7 +64,7 @@ end
 
 ### key_file
 
-The key_file of the application.
+The SSL key file location of the application.
 
 ```ruby
 class Application < Grip::Application
@@ -88,7 +76,7 @@ end
 
 ### cert_file
 
-The cert_file of the application.
+The SSL certificate file location of the application.
 
 ```ruby
 class Application < Grip::Application

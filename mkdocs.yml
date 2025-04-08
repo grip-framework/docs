@@ -52,7 +52,6 @@ nav:
       - Scope: "scope.md"
       - Forward: "forward.md"
       - WebSocket routing: "web_socket_routing.md"
-      - Static file handling: "static_file_handling.md"
       - Available verbs: "verbs.md"
   - Runtime flags: "runtime_flags.md"
   - Middleware:

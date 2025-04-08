@@ -47,7 +47,19 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development")
+    super(
+      environment: ENV["ENVIRONMENT"]? || "production"
+      handlers: [
+        Grip::Handlers::Pipeline.new,
+        Grip::Handlers::HTTP.new,
+        Grip::Handlers::WebSocket.new,
+      ] of HTTP::Handler
+    )
+
+    routes()
+  end
+
+  def routes()
 
     pipeline :api, [
       PoweredByHeader.new

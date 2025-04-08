@@ -32,8 +32,17 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development")
+    super(
+      environment: ENV["ENVIRONMENT"]? || "production"
+      handlers: [
+        Grip::Handlers::HTTP.new,
+      ] of HTTP::Handler
+    )
 
+    routes()
+  end
+
+  def routes()
     get "/", DemoController
   end
 end

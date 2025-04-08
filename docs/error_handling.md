@@ -21,8 +21,17 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development")
+    super(
+      environment: ENV["ENVIRONMENT"]? || "production"
+      handlers: [
+        Grip::Handlers::Exception.new,
+      ] of HTTP::Handler
+    )
 
+    routes()
+  end
+
+  def routes()
     exception Grip::Exceptions::Forbidden, ForbiddenController
   end
 end
@@ -64,8 +73,17 @@ end
 
 class Application < Grip::Application
   def initialize
-    super(environment: "development")
+    super(
+      environment: ENV["ENVIRONMENT"]? || "production"
+      handlers: [
+        Grip::Handlers::Exception.new,
+      ] of HTTP::Handler
+    )
 
+    routes()
+  end
+
+  def routes()
     exception NotImplementedError, FallbackController
   end
 end
