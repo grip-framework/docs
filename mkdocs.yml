@@ -47,16 +47,13 @@ nav:
   - Context: "context.md"
   - Routing:
       - Basic routing: "basic_routing.md"
-      - Intermediate routing: "intermediate_routing.md"
       - Advanced routing: "advanced_routing.md"
       - Scope: "scope.md"
       - Forward: "forward.md"
       - WebSocket routing: "web_socket_routing.md"
       - Available verbs: "verbs.md"
   - Runtime flags: "runtime_flags.md"
-  - Middleware:
-      - Pipe middleware: "pipe_middleware.md"
-      - Raw middleware: "raw_middleware.md"
+  - Middleware: "pipe_middleware.md"
   - Error handling: "error_handling.md"
   - SSL: "ssl.md"
   - Deployment: "deployment.md"
