@@ -65,6 +65,7 @@ end
 # Application configures and runs a Grip web application.
 class Application
   include Grip::Application
+  
   # Defines the array of HTTP handlers for processing requests.
   property handlers : Array(HTTP::Handler) = [
     Grip::Handlers::HTTP.new # Handles core HTTP protocol logic.

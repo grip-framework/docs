@@ -9,7 +9,9 @@ This example demonstrates Grip’s WebSocket capabilities, made simple by the Cr
 require "grip"
 
 # DemoController handles WebSocket connections and events.
-class DemoController < Grip::Controllers::WebSocket
+class DemoController
+  include Grip::Controllers::WebSocket
+
   # Executed when a client opens a WebSocket connection.
   # @param context [HTTP::Server::Context] The HTTP request context.
   # @param socket [Socket] The WebSocket connection.
@@ -86,11 +88,13 @@ class SecureHeaders
 end
 
 # Application configures and runs a Grip web application.
-class Application < Grip::Application
+class Application
+  include Grip::Application
+  
   # Defines the array of HTTP handlers for processing requests.
   property handlers : Array(HTTP::Handler) = [
     Grip::Handlers::Pipeline.new, # Manages the request pipeline for middleware execution.
-    Grip::Handlers::WebSocket.new  # Handles WebSocket protocol logic.
+    Grip::Handlers::WebSocket.new # Handles WebSocket protocol logic.
     Grip::Handlers::HTTP.new,     # Handles core HTTP protocol logic, it must be the last one as it handles all the requests.
   ] of HTTP::Handler
 

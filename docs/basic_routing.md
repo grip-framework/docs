@@ -14,11 +14,12 @@ class DemoController
 end
 
 # Application configures and runs a Grip web application.
-class Application < Grip::Application
+class Application
+  include Grip::Application
+
   # List of HTTP handlers for processing incoming requests.
   property handlers : Array(HTTP::Handler) = [
-    Grip::Handlers::Pipeline.new, # Manages the request pipeline.
-    Grip::Handlers::HTTP.new     # Handles core HTTP protocol logic.
+    Grip::Handlers::HTTP.new # Handles core HTTP protocol logic.
   ] of HTTP::Handler
 
   # Initializes the application and configures routes.

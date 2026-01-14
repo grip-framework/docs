@@ -22,7 +22,9 @@ class Authorization
 end
 
 # Application configures the Grip web application with handlers and routes.
-class Application < Grip::Application
+class Application
+  include Grip::Application
+  
   # Defines the array of HTTP handlers for processing requests.
   property handlers : Array(HTTP::Handler) = [
     Grip::Handlers::HTTP.new, # Handles core HTTP protocol logic.

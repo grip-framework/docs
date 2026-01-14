@@ -1,13 +1,14 @@
 This guide provides a complete setup for a Crystal web application using the Grip framework, including project initialization, dependency setup, application code, server execution, testing, and auto-restart configuration.
 
 ## 1. Initialize a Crystal Project
+
 ```shell
 # Initializes a new Crystal application named "demo" and navigates to its directory.
-# Creates a project structure with shard.yml, src/, and lib/ directories.
 crystal init app demo && cd demo
 ```
 
 ## 2. Add Dependency to `shard.yml` and Install
+
 ```yaml
 # shard.yml: Specifies project dependencies for the Crystal application.
 name: demo
@@ -24,11 +25,11 @@ crystal: 1.0.0
 
 dependencies:
   grip: # Adds the Grip web framework as a dependency.
-    github: grip-framework/grip # Points to the Grip repository on GitHub.
+    github: grip-framework/grip
 ```
 
 ```shell
-# Installs the dependencies listed in shard.yml, downloading Grip to lib/.
+# Installs the dependencies listed in shard.yml
 shards install
 ```
 
@@ -86,6 +87,7 @@ app.run
 ```
 
 ## 4. Run the Server
+
 ```shell
 # Compiles and runs the Crystal application, starting the Grip server.
 # The server listens on 0.0.0.0:4004 by default unless configured otherwise.
@@ -93,6 +95,7 @@ crystal src/demo.cr
 ```
 
 ## 5. Send a Request
+
 ```shell
 # Sends an HTTP GET request to the root path of the running server.
 # Expects a 201 response with a JSON body {"id": 1} and a Server header.
@@ -100,6 +103,7 @@ curl "http://0.0.0.0:4004/"
 ```
 
 ## 6. Auto-Restart Server
+
 ```shell
 # Installs nodemon globally to watch for file changes and auto-restart the server.
 sudo npm install -g nodemon

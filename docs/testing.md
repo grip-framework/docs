@@ -1,20 +1,24 @@
 ## 1. Add Spectator to `shard.yml`
+
 ```yaml
 # shard.yml: Configuration file for project dependencies and metadata.
 dependencies:
-  grip: # Grip microframework for building RESTful APIs.
+  grip:
     github: grip-framework/grip
+
   spectator: # Spectator testing framework for writing tests.
     github: grip-framework/spectator
 ```
 
 ## 2. Install Dependencies
+
 ```bash
 # Installs dependencies specified in shard.yml to the lib/ directory.
 shards install
 ```
 
 ## 3. Configure Test Environment
+
 ```crystal
 # spec/spec_helper.cr: Sets up the test environment for the Grip application.
 require "../src/your-grip-app" # Requires the main application code.
@@ -22,6 +26,7 @@ require "spectator" # Requires the Spectator testing framework.
 ```
 
 ## 4. Grip Application Code
+
 ```crystal
 # src/your-grip-app.cr: Defines a simple Grip application with a single route.
 require "grip"
@@ -61,6 +66,7 @@ end
 ```
 
 ## 5. Write Tests
+
 ```crystal
 # spec/your-grip-app-spec.cr: Tests for the Grip application’s Index controller.
 describe Index do
@@ -73,6 +79,7 @@ end
 ```
 
 ## 6. Run Tests
+
 ```bash
 # Runs the test suite defined in spec/ with the test environment.
 ENVIRONMENT=TEST crystal spec --verbose

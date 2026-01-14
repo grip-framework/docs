@@ -3,7 +3,7 @@ Application module is a building block which initializes the crucial parts of th
 ```crystal
 # Application is a building class that initializes the core components of the Grip web framework.
 # It manages the main handler stack and the HTTP server.
-class Application < Grip::Application
+class Application
   include Grip::Application
 
   # List of HTTP handlers for processing incoming requests.
@@ -16,13 +16,7 @@ class Application < Grip::Application
   # Defines the host address of the server.
   # @return [String] The host address (e.g., "0.0.0.0").
   def host : String
-    DEFAULT_HOST
-  end
-
-  # Defines the root path for routing (placeholder for custom implementation).
-  # @return [String] The root path for the application.
-  def root : String
-    "/"
+    "0.0.0.0"
   end
 
   # Placeholder for custom configuration or logic.
@@ -34,13 +28,13 @@ class Application < Grip::Application
   # Defines the port on which the server listens.
   # @return [Int32] The port number (e.g., 4004).
   def port : Int32
-    DEFAULT_PORT
+    4004
   end
 
   # Determines if the server reuses the port.
   # @return [Bool] True if port reuse is enabled, false otherwise.
   def reuse_port : Bool
-    DEFAULT_REUSE_PORT
+    true
   end
 
   # Defines the SSL key file location for the application.

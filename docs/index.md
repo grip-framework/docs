@@ -3,9 +3,13 @@ Grip is a lightweight microframework for building RESTful web applications in th
 ## Framework Features
 
 - **Microframework Design**: Grip focuses on simplicity for building RESTful APIs, enabling rapid development while supporting complex applications through modular extensions.
+
 - **Middleware ("Pipes")**: Integrated middleware, implemented as `HTTP::Handler` classes, processes and modifies request/response contexts (e.g., adding headers, authentication) before forwarding to endpoints.
+
 - **Router**: Inspired by the [Phoenix framework](https://github.com/phoenixframework/phoenix), Grip’s router offers expressive routing with macros like `get`, `scope`, `pipe_through`, and `forward` for defining endpoints and pipelines.
+
 - **Extensibility**: Developers can create custom middleware, controllers, and error handlers to tailor functionality to specific needs.
+
 - **High Performance**: Optimized for speed, Grip delivers exceptional throughput, making it ideal for high-performance API development.
 
 ## Recommended Project Structure
@@ -28,23 +32,34 @@ Echo/                       # Project root directory
 ```
 
 ### Structure Details
+
 - **lib/**: Contains external libraries (e.g., Grip) installed via `shards install`, managed by Crystal’s dependency manager.
+
 - **src/application.cr**: The application entry point, defining the `Application` class (inheriting from `Grip::Application`). It configures middleware via a `property handlers` array and sets up routes using macros like `get` or `forward`.
+
 - **src/echo/**: Houses business logic, including database models, services, or other domain-specific functionality, ensuring separation from web concerns.
+
 - **src/echo_web/**: Manages HTTP interactions, with controllers (e.g., `DemoController`) handling requests and views defining response formats (e.g., JSON, HTML).
+
 - **shards.yml**: Specifies project metadata and dependencies, such as `grip: { github: grip-framework/grip }`.
 
 ## Example Setup
+
 To create a Grip application with the above structure:
+
 1. Initialize a Crystal project: `crystal init app echo && cd echo`.
+
 2. Add Grip to `shards.yml`:
    ```yaml
    dependencies:
      grip:
        github: grip-framework/grip
    ```
+
 3. Install dependencies: `shards install`.
+
 4. Define the application in `src/application.cr`, configuring handlers and routes (see previous examples for controller and route definitions).
+
 5. Run the server: `crystal src/application.cr`.
 
 This structure and Grip’s features provide a robust foundation for building scalable, high-performance RESTful applications in Crystal.

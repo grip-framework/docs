@@ -32,7 +32,9 @@ class ForbiddenController
 end
 
 # Application configures the Grip web application with error handlers and routes.
-class Application < Grip::Application
+class Application
+  include Grip::Application
+
   # Defines the array of HTTP handlers for processing requests.
   property handlers : Array(HTTP::Handler) = [
     Grip::Handlers::Exception.new, # Handles exceptions using defined error controllers.
@@ -91,7 +93,9 @@ class FallbackController
 end
 
 # Application configures the Grip web application with a fallback error handler.
-class Application < Grip::Application
+class Application
+  include Grip::Application
+
   # Defines the array of HTTP handlers for processing requests.
   property handlers : Array(HTTP::Handler) = [
     Grip::Handlers::Exception.new, # Handles exceptions using defined error controllers.
