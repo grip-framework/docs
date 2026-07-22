@@ -50,7 +50,7 @@ nav:
       - Advanced routing: "advanced_routing.md"
       - Scope: "scope.md"
       - Forward: "forward.md"
-      - Server-Sent Events routing: "server_sent_events_routing.md"
+      - Server-Sent event routing: "server_sent_event_routing.md"
       - WebSocket routing: "web_socket_routing.md"
       - Available verbs: "verbs.md"
   - Runtime flags: "runtime_flags.md"
